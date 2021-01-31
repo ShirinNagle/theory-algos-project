@@ -1,38 +1,47 @@
 #include <stdio.h>
 
+
+void bin_print(int i){
+    //number of bits in an integer
+    int j = sizeof(int) * 8;
+
+    //temp variable
+    int k;
+    /*
+    look at for loop and figure out what is going on
+    */
+
+    for(j--;j >= 0; j--){
+        //<< bitshift to the left & bitwise and
+        k=((1 << j) & i) ? 1:0;//? : is a ternary operator. 
+        //condition on the left, what to do if true, what to do if false
+        printf("%d",k);
+    }
+}
+
 int main(int argc, char *argv[])//main takes 2 arguments, arg count and a pointer to a list
 {
     //https://en.wikipedia.org/wiki/Bitwise_operations_in_C
+    
     int i = 241;
+    int j = 0xf1;
+    bin_print(i);
+    printf("\n");
+    printf("j in binary from hex:\n");
+    bin_print(j);
+    printf("\n");
 
-    printf("Dec: %d\n", i);
-    printf("Hex: %x\n", i);//use X for capital letters to print out.
+    //bit shifting example
+    printf("Original:  ");
+    bin_print(i);
+    printf("\n");
 
-    int j = 0xF1;//0x tells compiler the number is in hex.
-    printf("Dec: %d\n", j);
-
-    //to find out how many bytes are in an int - returns 4
-    printf("Size of i: %d\n", sizeof(i));
-    //can check the size of types
-    printf("Size of int: %d\n", sizeof(char));
-    printf("Size of long: %d\n", sizeof(long));
-
-    //compiler will compile the below but not as expected
-    char c = 41;
-    printf("c in char is: %c\n", c);
-    printf("c in int is: %d\n", c);
-
-    char d = 65;
-    printf("d in char is: %c\n", d);
-    printf("d in int is: %d\n", d);
-
-    int e = 1000000000;
-    printf("e in char is: %c\n", e);// no output, char size 1 byte, too small to output e.
-    printf("e in int is: %d\n", e);
+    for(int j =0;j < 40; j++){
+        printf("%3d << %2d: ", i, j);
+        bin_print(i << j);
+        printf("\n");
+    }
 
 
-
-    //should always return 0 from main if there hasn't been an error, if not incl
-    //chaining programs on command line is not possible.
     return 0;
 }
