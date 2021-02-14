@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
+//https://www.gnu.org/software/libc/manual/html_node/Example-of-Getopt.html
 int
 main (int argc, char **argv)
 {
@@ -47,3 +47,40 @@ main (int argc, char **argv)
     printf ("Non-option argument %s\n", argv[index]);
   return 0;
 }
+//Examples of arguments to add command line and the optput
+/* 
+% optsarg
+aflag = 0, bflag = 0, cvalue = (null)
+
+% optsarg -a -b
+aflag = 1, bflag = 1, cvalue = (null)
+
+% optsarg -ab
+aflag = 1, bflag = 1, cvalue = (null)
+
+% optsarg -c foo
+aflag = 0, bflag = 0, cvalue = foo
+
+% optsarg -cfoo
+aflag = 0, bflag = 0, cvalue = foo
+
+% optsarg arg1
+aflag = 0, bflag = 0, cvalue = (null)
+Non-option argument arg1
+
+% optsarg -a arg1
+aflag = 1, bflag = 0, cvalue = (null)
+Non-option argument arg1
+
+% optsarg -c foo arg1
+aflag = 0, bflag = 0, cvalue = foo
+Non-option argument arg1
+
+% optsarg -a -- -b
+aflag = 1, bflag = 0, cvalue = (null)
+Non-option argument -b
+
+% optsarg -a -
+aflag = 1, bflag = 0, cvalue = (null)
+Non-option argument -
+ */
