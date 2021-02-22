@@ -8,6 +8,7 @@ main (int argc, char **argv)
 {
   int aflag = 0;
   int bflag = 0;
+  int dflag = 0;
   char *cvalue = NULL;
   int index;
   int c;
@@ -26,6 +27,9 @@ main (int argc, char **argv)
       case 'c':
         cvalue = optarg;
         break;
+        case 'd':
+        dflag = 1;
+        break;
       case '?':
         if (optopt == 'c')
           fprintf (stderr, "Option -%c requires an argument.\n", optopt);
@@ -40,8 +44,8 @@ main (int argc, char **argv)
         abort ();
       }
 
-  printf ("aflag = %d, bflag = %d, cvalue = %s\n",
-          aflag, bflag, cvalue);
+  printf ("aflag = %d, bflag = %d,dflag = %d, cvalue = %s\n",
+          aflag, bflag, dflag, cvalue);
 
   for (index = optind; index < argc; index++)
     printf ("Non-option argument %s\n", argv[index]);
