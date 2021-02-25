@@ -7,6 +7,27 @@
 
 //look at ROTR, SHR and Sigma large and sigma small.
 
+/*The rotate right (circular right shift) operation ROTR n(x), where x is a w-bit word
+and n is an integer with 0  n < w, is defined by
+ROTR n(x)=(x >> n)  (x << w - n).
+n = Number of bits to be rotated or shifted when a word is operated upon
+w = Number of bits in a word. 32 bits in this case*/
+WORD ROTR(WORD n, WORD x){
+    return (x >> n)|(x << 32 - n);
+}
+
+/*
+The right shift operation, where x is a w-bit word and n is an integer with 0
+ n < w, is defined by SHR n(x)=x >> n.
+SHR n(x)=x >> n.
+n = Number of bits to be rotated or shifted when a word is operated upon.
+*/
+WORD SHR(WORD n, WORD x){
+    return(x >> n);
+}
+
+
+
 //x, y and z need to be 32-bit words
 //note the size of ints in different devices may be a different size to 32-bits. Ch() = choose
 WORD Ch(WORD x, WORD y, WORD z)
