@@ -4,6 +4,7 @@
 //define a macro called WORD, define is a preprocessor directive, doesn't run at compile time
 #define WORD uint32_t
 #define PF PRIX32
+#define W 32
 
 //look at ROTR, SHR and Sigma large and sigma small.
 
@@ -13,7 +14,7 @@ ROTR n(x)=(x >> n)  (x << w - n).
 n = Number of bits to be rotated or shifted when a word is operated upon
 w = Number of bits in a word. 32 bits in this case*/
 WORD ROTR(WORD n, WORD x){
-    return (x >> n)|(x << 32 - n);
+    return (x >> n)|(x << W - n);
 }
 
 /*
@@ -49,6 +50,6 @@ WORD z = 0xf0f0f0f0;
 WORD ans = Ch(x,y,z);
 WORD ans1 = Maj(x,y,z);
  printf("Ch(%08"PF", %08"PF", %08"PF") = %08"PF"\n", x, y, z, ans );
- printf("Ch(%08"PF", %08"PF", %08"PF") = %08"PF"\n", x, y, z, ans1 );
+ printf("Maj(%08"PF", %08"PF", %08"PF") = %08"PF"\n", x, y, z, ans1 );
     return 0;
 }
