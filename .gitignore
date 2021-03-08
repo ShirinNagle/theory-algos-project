@@ -1,7 +1,11 @@
 # Local executables
-bitoperations 
+bitoperations
+bitoperationsAnd
+bitoperationsShift
 funcs
+functions
 preproc
+preprocess
 emptyexec
 
 # Prerequisites
