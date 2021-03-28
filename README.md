@@ -15,6 +15,16 @@ Repo to calculate the SHA512 value of an input file
    input to a hash algorithm, the result is an output called a message digest. The message digests range in length from 160 to 512 bits, depending on the algorithm.
    Secure hash algorithms are typically used with other cryptographic algorithms, such as digital signature algorithms and keyed-hash message authentication codes, or 
    in the generation of random numbers (bits).[1]
+
+
+
+
+
+   ### Understanding issues that required attention
+   
+   ![Endian Diagram Wikipedia](images/endianExampleWiki.PNG)
+   <br>
+   ![Endian Tables IBM](images/endianIBM.PNG)
     
    ### Why can't we reverse the SHA512 algorithm to retrieve the original message from a hash digest?
         
@@ -24,3 +34,7 @@ Repo to calculate the SHA512 value of an input file
 
   ## References
   [1] Secure Hash Standard (SHS); Information Technology Laboratory National Institute of Standards and Technology Gaithersburg, MD 20899-8900
+
+  ### Research on Topics not fully understood by me
+  https://en.wikipedia.org/wiki/Endianness
+  https://developer.ibm.com/technologies/systems/articles/au-endianc/
