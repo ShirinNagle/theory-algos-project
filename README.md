@@ -2,8 +2,13 @@
 Repo to calculate the SHA512 value of an input file
 
 
-   A description of your repository and its contents pitched at a knowledgeable outsider.
-   Compilation instructions stating how to compile, test, and run your program.
+   ### Description
+   Repository contains a program written in the C programming language to calculate the SHA512 value of an input file. The program takes the name (or path of the file)
+   as a command line argument and outputs the SHA512 digest of the file. The program compiles using gcc, please see the next section called Compiliation Instructions for
+   further explanation. The following files are included in the repository, SHA512 file, Makefile and this README.
+
+
+   ### Compilation instructions stating how to compile, test, and run your program.
    
    ### An explanation of what the SHA512 algorithm is and why it is important.
    When a message of any length less than 2^64 bits (forSHA-1, SHA-224 and SHA-256) or less than 2^128 bits (for SHA-384, SHA-512, SHA-512/224and SHA-512/256) is
