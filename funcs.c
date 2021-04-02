@@ -2,7 +2,7 @@
 #include <inttypes.h>
 
 //define a macro called WORD, define is a preprocessor directive, doesn't run at compile time
-#define WORD uint32_t
+#define WORD uint32_t//unsigned 32bit int 
 #define PF PRIX32
 #define W 32
 

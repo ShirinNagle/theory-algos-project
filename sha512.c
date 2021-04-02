@@ -10,7 +10,7 @@ const int _i = 1;
 
 // Words and bytes.
 #define WORD uint64_t //P3 Secure hash standard, Fig 1: SHA-512 Word size in bits = 64
-#define PF PRIx32
+#define PF PRIx64
 #define BYTE uint8_t
 
 // Page 5 of the secure hash standard.
