@@ -13,7 +13,7 @@ const int _i = 1;
 #define PF PRIx64
 #define BYTE uint8_t
 
-// Page 5 of the secure hash standard.
+// Page 5 of the secure hash standard. Helper Functions
 #define ROTL(_x,_n) ((_x << _n) | (_x >> ((sizeof(_x)*8) - _n)))
 #define ROTR(_x,_n) ((_x >> _n) | (_x << ((sizeof(_x)*8) - _n)))
 #define SHR(_x,_n) (_x >> _n)
