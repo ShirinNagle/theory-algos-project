@@ -5,9 +5,12 @@ bitoperationsShift
 funcs
 functions
 preproc
-preproc1
 preprocess
 emptyexec
+funcs512
+preproc512
+sha256
+sha512
 
 # Prerequisites
 *.d

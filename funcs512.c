@@ -47,8 +47,11 @@ const WORD K[] = {
 0x28db77f523047d84, 0x32caab7b40c72493, 0x3c9ebe0a15c9bebc, 0x431d67c49c100d4c,
 0x4cc5d4becb3e42b6, 0x597f299cfc657e2a, 0x5fcb6fab3ad6faec, 0x6c44198c4a475817
 };
-
-
+//P15 & 16 SHS Section 5.3.5
+WORD H[] = {
+0x6a09e667f3bcc908, 0xbb67ae8584caa73b, 0x3c6ef372fe94f82b, 0xa54ff53a5f1d36f1, 
+0x510e527fade682d1, 0x9b05688c2b3e6c1f, 0x1f83d9abfb41bd6b, 0x5be0cd19137e2179
+};
 int main(int argc, char *argv[]){
 
 WORD x = 0xF1234567;
@@ -58,14 +61,14 @@ WORD z = 0xb0b0b0b0;
 //Temp word for answers
 WORD ans = CH(x,y,z);
 WORD ans1 = MAJ(x,y,z);
- printf("Ch(%08"PF", %08"PF", %08"PF") = %08"PF"\n", x, y, z, ans );
- printf("MAJ(%08"PF", %08"PF", %08"PF") = %08"PF"\n", x, y, z, ans1 );
- printf("ROTL(%08" PF " -> %08" PF "\n", x, ROTL(x,4));//shift x 4 positions the the left
- printf("ROTR(%08" PF " -> %08" PF "\n", x, ROTR(x,4));//when W is 64 bits lots of 0's added 7000000000123456. Output if 32 bits is 70123456
- printf("SIG0(%08" PF " -> %08" PF "\n", x, SIG0(x));  
- printf("SIG1(%08" PF " -> %08" PF "\n", x, SIG1(x)); 
- printf("Sig0(%08" PF " -> %08" PF "\n", x, Sig0(x)); 
- printf("Sig1(%08" PF " -> %08" PF "\n", x, Sig1(x)); 
- printf("K[0] = %08" PF "\tK[63] = %08" PF "\n", K[0],K[79]);
+ printf("Ch(%016"PF", %016"PF", %016"PF") = %016"PF"\n", x, y, z, ans );
+ printf("MAJ(%016"PF", %016"PF", %016"PF") = %016"PF"\n", x, y, z, ans1 );
+ printf("ROTL(%016" PF " -> %016" PF "\n", x, ROTL(x,4));//shift x 4 positions the the left
+ printf("ROTR(%016" PF " -> %016" PF "\n", x, ROTR(x,4));//when W is 64 bits lots of 0's added 7000000000123456. Output if 32 bits is 70123456
+ printf("SIG0(%016" PF " -> %016" PF "\n", x, SIG0(x));  
+ printf("SIG1(%016" PF " -> %016" PF "\n", x, SIG1(x)); 
+ printf("Sig0(%016" PF " -> %016" PF "\n", x, Sig0(x)); 
+ printf("Sig1(%016" PF " -> %016" PF "\n", x, Sig1(x)); 
+ printf("K[0] = %016" PF "\tK[63] = %016" PF "\n", K[0],K[79]);
     return 0;
 }

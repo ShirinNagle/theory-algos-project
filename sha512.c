@@ -28,13 +28,13 @@ const int _i = 1;
 #define Sig1(_x) (ROTR(_x,19) ^ ROTR(_x,61) ^ SHR(_x,6))
 
 // SHA256 works on blocks of 512 bits.
-union Block {
+union Block {//used as per Section 5.2.1
     // 8 x 64 = 512 - dealing with block as bytes.
-    BYTE bytes[64];
+    BYTE bytes[128];
     // 32 x 16 = 512 - dealing with block as words.
     WORD words[16];
     // 64 x 8 = 512 - dealing with the last 64 bits of last block.
-    uint64_t sixf[8];
+    uint64_t sixf[16];
 };
 
 //enum for keeping track of where we are with the input message/padding, like a flag
@@ -89,7 +89,7 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits) {
 
 int next_hash(union Block *M, WORD H[]) {
     // Message schedule, Section 6.4.2
-    WORD W[64];//may need to change to 128.
+    WORD W[128];//may need to change to 128.
     // Iterator.
     int t;
     // Temporary variables.
