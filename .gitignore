@@ -3,9 +3,7 @@ bitoperations
 bitoperationsAnd
 bitoperationsShift
 funcs
-functions
 preproc
-preprocess
 emptyexec
 funcs512
 preproc512
