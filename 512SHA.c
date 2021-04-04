@@ -1,6 +1,11 @@
 #include<stdio.h>
 #include<inttypes.h>
 
+//Endianess. Adapted from   https://developer.ibm.com/technologies/systems/articles/au-endianc/
+#include<byteswap.h>
+const int _i = 1;
+#define is_lilendian() ((*(char*)&_i) !=0)
+
 #define WORD uint64_t//unsigned 128bit int 
 #define PF PRIx64
 #define WLEN 64//length of a word
@@ -13,7 +18,7 @@
 
 #define ROTL(x,n) ((x << n)|(x >>(WLEN-n)))
 #define ROTR(x,n) ((x >> n)|(x <<(WLEN-n)))
-#define SHR(x,n) x >> n
+#define SHR(x,n) (x >> n)
 
 //P 11 of SHS
 #define SIG0(x) (ROTR(x,28)^ROTR(x,34)^ROTR(x,39))
@@ -76,15 +81,15 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits)//uint6
         // need enough room for 128 + 1 bits, 1024 - 129, 
         if(nobytes == 128){
             //This happens when we can read 128 bytes from f
-            return 1;
+            //Do nothing;
         }
         // need enough room for 128 + 1 bits, 1024 - 129,
-        else if(nobytes < 112){//111
+        else if(nobytes < 112){//112
             //This happens when there is enough room for all the padding
             //Append a 1 bit and 7 0 bits to make the byte
             M->bytes[nobytes++] = 0x80;//in bits: 10000000//possibly 0x8000
             //Append enough 0 bits, leaving 128 at the end
-            for(nobytes++; nobytes < 112; nobytes++){//111
+            for(nobytes++; nobytes < 112; nobytes++){//112
                 //Append 8 0's
                 M->bytes[nobytes++] = 0x00;//in bits: 00000000//possibly 0x0000
             }
@@ -108,15 +113,20 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits)//uint6
         }else if(*S == PAD){
             nobytes = 0;
             //Append 0 bits
-            for (nobytes = 0; nobytes < 112; nobytes++)
+            for (nobytes = 0; nobytes < 112; nobytes++)//112
             {
                  M->bytes[nobytes] = 0x00;//in bits: 00000000//possibly 0x0000
             }
             //Append nobits as an integer - Check Endianess
-             M->sixf[15] = *nobits;
+             //M->sixf[15] = *nobits;
+             M->sixf[15] = (is_lilendian() ? bswap_64(*nobits) : *nobits);
              //Change the status to PAD
             *S = END; 
         }
+        //swap the byte order of the words if we're little endian
+        if(is_lilendian())
+        for(int i = 0; i < 16; i++)
+            M->words[i] = bswap_32(M->words[i]);//reverses byte order, operations will happen big endian style
     return 1;  
  }
 
@@ -153,7 +163,7 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits)//uint6
         c = b;
         b = a;
         a = T1 + T2;
-        //printf("a: %08" PF "...", a);
+        printf("a: %016" PF "...", a);
     }
     //section 6.2.4, Step 4
     H[0] = a + H[0]; H[1] = b + H[1]; H[2] = c + H[2]; H[3] = d + H[3];
@@ -177,7 +187,17 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits)//uint6
      
      //loop through the preprocessed blocks from the input
      while (next_block(f, &M, &S, &nobits)){
-        next_hash(&M, H);
+         //Print the final SHA512 hash
+        for (int i = 0; i < 8; i++)//8 * 64 bit words
+         printf("%016" PF, H[i]);
+         printf("\n");
+         next_hash(&M, H);
+         for (int i = 0; i < 8; i++){//8 * 64 bit words
+         printf("%016" PF, H[i]);
+         printf("\n");
+         
+         }
+        
     }
     return 0;
  }

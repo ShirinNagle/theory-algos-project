@@ -1,9 +1,9 @@
 #include <stdio.h>
 
 
-void bin_print(int i){
+void bin_print(unsigned int i){
     //number of bits in an integer
-    int j = sizeof(int) * 8;
+    int j = sizeof(unsigned int) * 8;
     //temp variable
     int k;
     
@@ -21,7 +21,7 @@ int main(int argc, char *argv[])//main takes 2 arguments, arg count and a pointe
 {
     //https://en.wikipedia.org/wiki/Bitwise_operations_in_C
     
-    int i = 241;
+    unsigned int i = 0xffffffff;//241;//4294967295
     int j = 0xf1;//hex value of 241
     bin_print(i);
     printf("\n");
@@ -34,10 +34,11 @@ int main(int argc, char *argv[])//main takes 2 arguments, arg count and a pointe
     //print in binary
     bin_print(i);
     printf("\n");
+    printf("\t%x\t%d\n",i,i);
 
     for(int j =0;j < 40; j++){
         //Prints out the value of i, shifted j positions. eg 241 << 1: 
-        printf("%3d << %2d: ", i, j);
+        printf("%3u << %2d: ", i, j);
         //i shifted left j times
         bin_print(i << j);
         printf("\n");
