@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<inttypes.h>
+#include <string.h>
 
 //Endianess. Adapted from   https://developer.ibm.com/technologies/systems/articles/au-endianc/
 #include<byteswap.h>
@@ -215,16 +216,64 @@ int main(int argc, char *argv[]){
     0x510e527fade682d1, 0x9b05688c2b3e6c1f, 0x1f83d9abfb41bd6b, 0x5be0cd19137e2179
     };
    
+    char fileName[100];
+    int option;
     FILE *f; //* = pointer, 
-    //Open file from command line for reading
-    f = fopen(argv[1], "r"); // path and mode, argv[1] supply a command line argument or program will crash
+    
+    // Check if file was entered as cmd argument.
+	if (argv[1] == NULL)
+	{
+		printf("No file specified please select option 1.\n");
+        printf("1: Calculate  sha512 of an input file\n");
+		
+		scanf("%d", &option);
 
-    //Calculate the SHA512 of f.
-    sha512(f, H);
-    //Print the final SHA512 hash
-    for (int i = 0; i < 8; i++){//8 * 64 bit words
+		if (option == 1)
+		{
+			printf("Please enter a file name: ");
+			scanf("%s", fileName);
+			printf("Searching for %s.....\n", fileName);
+		}
+		
+		else
+		{
+			printf("Invalid option ");
+		}
+		f = fopen(fileName, "r");
+	}
+	else
+	{
+		f = fopen(argv[1], "r");
+		strcpy(fileName, argv[1]);
+	}
+
+	// Check if file opened succesfully.
+	if (f == NULL)
+	{
+		printf("[ERROR]: Could not open file.\n");
+	}
+	else
+	{
+		// Run Secure Hash Algorithim on the file.
+		printf("[FILE READ SUCCESSFUL]: Running sha512 Hash Computation.....\n");
+		printf("test for %s.....\n", fileName);
+		sha512(f, H);
+        for (int i = 0; i < 8; i++){//8 * 64 bit words
         printf("%016" PF, H[i]);
     }
+   
+	}
+
+
+    //Open file from command line for reading
+    //f = fopen(argv[1], "r"); // path and mode, argv[1] supply a command line argument or program will crash
+
+    //Calculate the SHA512 of f.
+    //sha512(f, H);
+    //Print the final SHA512 hash
+    //for (int i = 0; i < 8; i++){//8 * 64 bit words
+       // printf("%016" PF, H[i]);
+    //}
    
     fclose(f);//close file when finished
     //printf("Total bits read %d. \n", nobits);//comment this line out when done
