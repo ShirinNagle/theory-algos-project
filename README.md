@@ -18,15 +18,14 @@ Repo to calculate the SHA512 value of an input file
    This project is using the SHA-512 algorithm as a basis for a program written in C.
 
    A cryptographic hash function is a mathematical algorithm that maps data (called the "message") to a bit array of a fixed size, called the "hash value", 
-   "hash or "message digest". It is a one way function that is practically infeasible to invert. Currently, the only way to find a message that produces a given hash is to attempt
-   a brute-force search of possible inputs to see if they produce a match.
+   "hash or "message digest". It is a one way function that is practically infeasible to invert. Currently, the only way to find a message that produces a given hash                is to attempt a brute-force search of possible inputs to see if they produce a match.
 
    Cryptographic hash functions should have the following main properties:
 
-   Deterministic, meaning that the same message always results in the same hash
-   Quick to compute the hash value for any given message
-   Infeasible to generate a message that yields a given hash value (i.e. to reverse the process that generated the given hash value)
-   Infeasible to find two different messages with the same hash value
+   Deterministic, meaning that the same message always results in the same hash.<br>
+   Quick to compute the hash value for any given message.<br>
+   Infeasible to generate a message that yields a given hash value (i.e. to reverse the process that generated the given hash value).<br>
+   Infeasible to find two different messages with the same hash value.<br>
    A small change to a message should change the hash value so extensively that a new hash value appears uncorrelated with the old hash value.[2]
 
    When a message of any length less than 2^64 bits (forSHA-1, SHA-224 and SHA-256) or less than 2^128 bits (for SHA-384, SHA-512, SHA-512/224and SHA-512/256) is
