@@ -17,8 +17,8 @@ const int _i = 1;
 #define CH(x,y,z) (x & y)^(~x & z) //x, y and z need to be 64-bit words
 #define MAJ(x,y,z) (x & y)^(x & z)^(y & z)
 
-#define ROTL(x,n) ((x << n)|(x >>(WLEN-n)))
-#define ROTR(x,n) ((x >> n)|(x <<(WLEN-n)))
+#define ROTL(x,n) ((x << n)|(x >>((sizeof(x)*8)-n)))
+#define ROTR(x,n) ((x >> n)|(x <<((sizeof(x)*8)-n)))
 #define SHR(x,n) (x >> n)
 
 //P 11 of SHS
@@ -87,36 +87,36 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits)//uint6
         // need enough room for 128 + 1 bits, 1024 - 129,
         else if(nobytes < 112){//112
             //This happens when there is enough room for all the padding
-            //Append a 1 bit and 7 0 bits to make the byte
-            M->bytes[nobytes++] = 0x80;//in bits: 10000000//possibly 0x8000
+            //Append a 1 bit and 15 0 bits to make the byte
+            M->bytes[nobytes] = 0x80;//in bits: 10000000//M->bytes[nobytes++] = 0x80
             //Append enough 0 bits, leaving 128 at the end
             for(nobytes++; nobytes < 112; nobytes++){//112
-                //Append 8 0's
-                M->bytes[nobytes++] = 0x00;//in bits: 00000000//possibly 0x0000
+                //Append 16 0's
+                M->bytes[nobytes] = 0x00;//in bits: 00000000//M->bytes[nobytes++] = 0x00;
             }
             //CHECK BIG ENDIAN
             //Append length of original input
-            M->sixf[15] = *nobits;//this needs to be big endian
+            //M->sixf[15] = *nobits;//this needs to be big endian
+            M->sixf[15] = (is_lilendian() ? bswap_64(*nobits) : *nobits);
             //say this is the last block
             *S = END;
         }else{
             //Got to the end of the input message not enough room in this block for all the padding
             //append a 1 bit and 15 0 bits to make a 2 full bytes
-            M->bytes[nobytes++] = 0x80;//possibly 0x8000
+            M->bytes[nobytes] = 0x80;//M->bytes[nobytes++] = 0x80;
             //append 0 bits
             for (nobytes++; nobytes < 128; nobytes++)
             {
-                 M->bytes[nobytes] = 0x00;//in bits: 00000000//possibly 0x0000
-            }
+                 M->bytes[nobytes] = 0x00;//in bits: 00000000//
             //Change the status to PAD
             *S = PAD;     
         }
-        }else if(*S == PAD){
-            nobytes = 0;
+        }}else if(*S == PAD){
+            
             //Append 0 bits
             for (nobytes = 0; nobytes < 112; nobytes++)//112
             {
-                 M->bytes[nobytes] = 0x00;//in bits: 00000000//possibly 0x0000
+                 M->bytes[nobytes] = 0x00;//in bits: 00000000//
             }
             //Append nobits as an integer - Check Endianess
              //M->sixf[15] = *nobits;
@@ -127,7 +127,7 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits)//uint6
         //swap the byte order of the words if we're little endian
         if(is_lilendian())
         for(int i = 0; i < 16; i++)
-            M->words[i] = bswap_32(M->words[i]);//reverses byte order, operations will happen big endian style
+            M->words[i] = bswap_64(M->words[i]);//reverses byte order, operations will happen big endian style
     return 1;  
  }
 
