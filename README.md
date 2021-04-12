@@ -81,6 +81,6 @@ Repo to calculate the SHA512 value of an input file
 
 # To Do List
    
-  Research http://www.righto.com/2014/09/mining-bitcoin-with-pencil-and-paper.html
-  Research bitcoin - understand what it does and why it's so secure
-  look at open ssl project
+  Research http://www.righto.com/2014/09/mining-bitcoin-with-pencil-and-paper.html <br>
+  Research bitcoin - understand what it does and why it's so secure <br>
+  look at open ssl project <br>
