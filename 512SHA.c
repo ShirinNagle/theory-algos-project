@@ -188,16 +188,11 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits)//uint6
      
      //loop through the preprocessed blocks from the input
      while (next_block(f, &M, &S, &nobits)){
+         next_hash(&M, H);//&M sends the address of M, H sends the address of the 1st item in H. as H is an array
          //Print the final SHA512 hash
-        for (int i = 0; i < 8; i++)//8 * 64 bit words
-         printf("%016" PF, H[i]);
-         printf("\n");
-         next_hash(&M, H);
-         for (int i = 0; i < 8; i++){//8 * 64 bit words
-         printf("%016" PF, H[i]);
-         printf("\n");
+       
          
-         }
+         
         
     }
     return 0;
@@ -258,10 +253,11 @@ int main(int argc, char *argv[]){
 		printf("[FILE READ SUCCESSFUL]: Running sha512 Hash Computation.....\n");
 		printf("test for %s.....\n", fileName);
 		sha512(f, H);
-        for (int i = 0; i < 8; i++){//8 * 64 bit words
+        for (int i = 0; i < 8; i++)
+        {//16 * 64 bit words
         printf("%016" PF, H[i]);
-    }
-   
+        }
+        
 	}
 
 
@@ -274,7 +270,8 @@ int main(int argc, char *argv[]){
     //for (int i = 0; i < 8; i++){//8 * 64 bit words
        // printf("%016" PF, H[i]);
     //}
-   
+    printf("\n");
+    printf("The end of the program");
     fclose(f);//close file when finished
     //printf("Total bits read %d. \n", nobits);//comment this line out when done
 
