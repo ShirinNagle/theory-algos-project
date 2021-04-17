@@ -91,13 +91,13 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits) //uint
             //Do nothing;
         }
         // need enough room for 128 + 1 bits, 1024 - 129,
-        else if (nobytes < 112)
+        else if (nobytes < 111)
         { //112
             //This happens when there is enough room for all the padding
             //Append a 1 bit and 15 0 bits to make the byte
             M->bytes[nobytes] = 0x80; //in bits: 10000000//M->bytes[nobytes++] = 0x80
             //Append enough 0 bits, leaving 128 at the end
-            for (nobytes++; nobytes < 112; nobytes++)
+            for (nobytes++; nobytes < 111; nobytes++)
             { //112
                 //Append 16 0's
                 M->bytes[nobytes] = 0x00; //in bits: 00000000//M->bytes[nobytes++] = 0x00;
@@ -119,15 +119,16 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits) //uint
             {
                 M->bytes[nobytes] = 0x00; //in bits: 00000000//
                 //Change the status to PAD
-                *S = PAD;
+                
             }
+            *S = PAD;
         }
     }
     else if (*S == PAD)
     {
 
         //Append 0 bits
-        for (nobytes = 0; nobytes < 112; nobytes++) //112
+        for (nobytes = 0; nobytes < 111; nobytes++) //112
         {
             M->bytes[nobytes] = 0x00; //in bits: 00000000//
         }
@@ -152,8 +153,8 @@ int next_hash(union Block *M, WORD H[])
 {
     //initial hash value H_0
     // message schedule, section 6.2.4
-    WORD W[80]; //made up of 80
-                //iterator
+    WORD W[128]; //made up of 80
+                
     int t;
 
     //temp variables
