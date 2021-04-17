@@ -49,6 +49,8 @@ Repo to calculate the SHA512 value of an input file
    ### Can you design an algorithm that, given enough time, will find input messages that give each of the possible 512-bit strings?
         
    ### How difficult is it to find a hash digest beginning with at least twelve zeros?
+   This was a confusing question for me, I needed to investigate what benefit is it to have a hash digest beginning with a least twelve zeros, 
+   Bitcoin mining was mentioned in a lecture as a possible way to understand the value of a hash digest beginning with at least twelve zeros. Ken Shiriff's blog was mentioned as a good starting point to understand bitcoin and bitcoin mining.
 
   ## References
   [1] Secure Hash Algorithms; https://en.wikipedia.org/wiki/Secure_Hash_Algorithms
@@ -83,4 +85,9 @@ Repo to calculate the SHA512 value of an input file
    
   Research http://www.righto.com/2014/09/mining-bitcoin-with-pencil-and-paper.html <br>
   Research bitcoin - understand what it does and why it's so secure <br>
+  Bitcoin http://www.righto.com/2014/02/bitcoins-hard-way-using-raw-bitcoin.html
+  Bitcoin Mining http://www.righto.com/2014/02/bitcoin-mining-hard-way-algorithms.html
+  https://bitcoin.org/en/how-it-works
+  https://michaelnielsen.org/ddi/how-the-bitcoin-protocol-actually-works/
+  
   look at open ssl project <br>
