@@ -5,8 +5,8 @@
 echo "Checking file input.txt."
 expec="$(sha512sum input.txt)"
 actual="$(./512SHA input.txt)  input.txt"
-echo "Expected: " $expec
-echo "Actual: " $actual
+echo "Expected:" $expec
+echo "Actual: "  $actual
 
 if [[ $actual == $expec ]];then
     echo "Pass"
