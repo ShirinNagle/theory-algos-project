@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <inttypes.h>
 #include <string.h>
+#include <unistd.h>
 
 //Endianess. Adapted from   https://developer.ibm.com/technologies/systems/articles/au-endianc/
 #include <byteswap.h>
@@ -232,6 +233,40 @@ int main(int argc, char *argv[])
     //read docs about different possible errors
     //Deal with command line arguments here.
 
+    //https://www.geeksforgeeks.org/getopt-function-in-c-to-parse-command-line-arguments/
+    int opt;
+    //The below code does work but the additional text causes the test to fail, 
+    //commenting out - but the sha512 is still correct
+    /*
+    while((opt = getopt(argc, argv, ":if:lrx")) != -1)
+    {
+        switch (opt)
+        {
+        case 'i':
+        case 'l':
+        case 'r':
+            printf("option: %c\n", opt);
+            break;
+        case 'f':
+            printf("filename: %s\n", optarg);
+            break;
+        case ':':
+            printf("Option needs a value\n");
+            break;
+        case '?':
+            printf("unknown option: %c\n", optopt);
+        
+        default:
+            break;
+        }
+    }
+    // optind is for the extra arguments which are not parsed
+    //this for loop probably should be at the top of main but want it to pass the test, easier to move down here
+    //as not familiar with shell
+    for(; optind < argc; optind++){     
+        printf("extra arguments: %s\n", argv[optind]); 
+    }*/
+
     //P15 & 16 SHS Section 5.3.5
     WORD H[] = {
         0x6a09e667f3bcc908, 0xbb67ae8584caa73b, 0x3c6ef372fe94f82b, 0xa54ff53a5f1d36f1,
@@ -299,5 +334,7 @@ int main(int argc, char *argv[])
     fclose(f); //close file when finished
                //printf("Total bits read %d. \n", nobits);//comment this line out when done
 
+    
+    
     return 0;
 }

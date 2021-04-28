@@ -15,4 +15,7 @@ test: 512SHA input.txt tests.sh
 # make clean
 clean:
 	rm -f $(EXECS)
+
+optsarg: optargs.c
+	cc -o optargs optargs.c
 	
