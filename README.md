@@ -9,8 +9,11 @@ Repo to calculate the SHA512 value of an input file
    The following files are included in the repository, SHA512 file, Makefile, test files and this README.
 
 
-   ### Compilation instructions stating how to compile, test, and run your program.
-   
+   ### Compilation instructions
+   To run the program, clone the repository by clicking on the green button titled code. Click on the copy button to the rigth of the address or copy the address.
+   Open a folder on your local machine. On the command line navigate to the folder, for example if the folder is called SHA512Algorithm and is located on the Desktop        of your local machine the path should look something like the below.<br>
+   C:\Users\xxxxxx\Desktop\SHA512Algorithm<br>
+   Once in the correct location enter git clone and the copied address. Press enter. This will clone the repository to this folder. To run the program you will need to change directory into the folder theory-of-algos-project, enter cd theory-of-algos-project on the command line. 
    ### An explanation of what the SHA-512 algorithm is and why it is important.
    Secure Hash Algorithms are a family of cryptographic hash functions published by the National Institute of Standards and Technology(NSIT). 
    These include SHA-2 algorithms, which is a family of two similar hash functions, with different block sizes, kown as SHA-256 and SHA-512. 
