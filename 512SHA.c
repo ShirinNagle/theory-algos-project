@@ -90,13 +90,13 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits) //uint
             //Do nothing;
         }
         // need enough room for 128 + 1 bits, 1024 - 129,
-        else if (nobytes < 120)
+        else if (nobytes <=119)
         { //112
             //This happens when there is enough room for all the padding
             //Append a 1 bit and 15 0 bits to make the byte
             M->bytes[nobytes] = 0x80; //in bits: 10000000//M->bytes[nobytes++] = 0x80
             //Append enough 0 bits, leaving 128 at the end
-            for (nobytes++; nobytes < 120; nobytes++)
+            for (nobytes++; nobytes <=119; nobytes++)
             { //112
                 //Append 16 0's
                 M->bytes[nobytes] = 0x00; //in bits: 00000000//M->bytes[nobytes++] = 0x00;
@@ -114,12 +114,12 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits) //uint
             //append a 1 bit and 15 0 bits to make a 2 full bytes
             M->bytes[nobytes] = 0x80; //M->bytes[nobytes++] = 0x80;
             //append 0 bits
-            for (nobytes++; nobytes < 120; nobytes++)
+            for (nobytes++; nobytes < 128; nobytes++)
             {
                 M->bytes[nobytes] = 0x00; //in bits: 00000000//
-                //Change the status to PAD
                 
             }
+            //Change the status to PAD
             *S = PAD;
         }
     }
@@ -127,7 +127,7 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits) //uint
     {
 
         //Append 0 bits
-        for (nobytes = 0; nobytes < 120; nobytes++) //112
+        for (nobytes = 0; nobytes <= 119; nobytes++) //112
         {
             M->bytes[nobytes] = 0x00; //in bits: 00000000//
         }

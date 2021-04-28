@@ -8,4 +8,25 @@ SHA-2 includes significant changes from its predecessor, SHA-1. The SHA-2 family
 
 SHA-2 was first published by the National Institute of Standards and Technology (NIST) as a U.S. federal standard (FIPS). The SHA-2 family of algorithms are patented in US patent 6829355.[5] The United States has released the patent under a royalty-free license.[6]
 
-Currently, the best public attacks break preimage resistance for 52 out of 64 rounds of SHA-256 or 57 out of 80 rounds of SHA-512, and collision resistance for 46 out of 64 rounds of SHA-256.[
+Currently, the best public attacks break preimage resistance for 52 out of 64 rounds of SHA-256 or 57 out of 80 rounds of SHA-512 and collision resistance for 46 out of 64 rounds of SHA-256.[
+
+    The SHA-2 hash function is implemented in some widely used security applications and protocols, including TLS and SSL, PGP, SSH, S/MIME, and IPsec.
+
+SHA-256 partakes in the process of authenticating Debian software packages[15] and in the DKIM message signing standard; SHA-512 is part of a system to authenticate archival video from the International Criminal Tribunal of the Rwandan genocide.[16] SHA-256 and SHA-512 are proposed for use in DNSSEC.[17] Unix and Linux vendors are moving to using 256- and 512-bit SHA-2 for secure password hashing.[18]
+
+Several cryptocurrencies like Bitcoin use SHA-256 for verifying transactions and calculating proof of work[19] or proof of stake.[20] The rise of ASIC SHA-2 accelerator chips has led to the use of scrypt-based proof-of-work schemes.
+
+SHA-1 and SHA-2 are the Secure Hash Algorithms required by law for use in certain U.S. Government applications, including use within other cryptographic algorithms and protocols, for the protection of sensitive unclassified information. FIPS PUB 180-1 also encouraged adoption and use of SHA-1 by private and commercial organizations. SHA-1 is being retired for most government uses; the U.S. National Institute of Standards and Technology says, "Federal agencies should stop using SHA-1 for...applications that require collision resistance as soon as practical, and must use the SHA-2 family of hash functions for these applications after 2010" (emphasis in original).[21] NIST's directive that U.S. government agencies must stop uses of SHA-1 after 2010[22] was hoped to accelerate migration away from SHA-1.
+
+The SHA-2 functions were not quickly adopted initially, despite better security than SHA-1. Reasons might include lack of support for SHA-2 on systems running Windows XP SP2 or older[23] and a lack of perceived urgency since SHA-1 collisions had not yet been found. The Google Chrome team announced a plan to make their web browser gradually stop honoring SHA-1-dependent TLS certificates over a period from late 2014 and early 2015.[24][25][26] Similarly, Microsoft announced[27] that Internet Explorer and Edge would stop honoring public SHA-1-signed TLS certificates from February 2017. Mozilla disabled SHA-1 in early January 2016, but had to re-enable it temporarily via a Firefox update, after problems with web-based user interfaces of some router models and security appliances.[28]
+Cryptanalysis and validation
+
+For a hash function for which L is the number of bits in the message digest, finding a message that corresponds to a given message digest can always be done using a brute force search in 2L evaluations. This is called a preimage attack and may or may not be practical depending on L and the particular computing environment. The second criterion, finding two different messages that produce the same message digest, known as a collision, requires on average only 2L/2 evaluations using a birthday attack.
+
+Some of the applications that use cryptographic hashes, such as password storage, are only minimally affected by a collision attack. Constructing a password that works for a given account requires a preimage attack, as well as access to the hash of the original password (typically in the shadow file) which may or may not be trivial. Reversing password encryption (e.g., to obtain a password to try against a user's account elsewhere) is not made possible by the attacks. (However, even a secure password hash cannot prevent brute-force attacks on weak passwords.)
+
+In the case of document signing, an attacker could not simply fake a signature from an existing document—the attacker would have to produce a pair of documents, one innocuous and one damaging, and get the private key holder to sign the innocuous document. There are practical circumstances in which this is possible; until the end of 2008, it was possible to create forged SSL certificates using an MD5 collision which would be accepted by widely used web browsers.[29]
+
+Increased interest in cryptographic hash analysis during the SHA-3 competition produced several new attacks on the SHA-2 family, the best of which are given in the table below. Only the collision attacks are of practical complexity; none of the attacks extend to the full round hash function.
+
+At FSE 2012, researchers at Sony gave a presentation suggesting pseudo-collision attacks could be extended to 52 rounds on SHA-256 and 57 rounds on SHA-512 by building upon the biclique pseudo-preimage attack.[30] 
