@@ -11,9 +11,16 @@ Repo to calculate the SHA512 value of an input file
 
    ### Compilation instructions
    To run the program, clone the repository by clicking on the green button titled code. Click on the copy button to the rigth of the address or copy the address.
-   Open a folder on your local machine. On the command line navigate to the folder, for example if the folder is called SHA512Algorithm and is located on the Desktop        of your local machine the path should look something like the below.<br>
+   Open a folder on your local machine. On the command line navigate to the folder, for example if the folder is called SHA512Algorithm and is located on the Desktop        
+of your local machine the path should look something like the below.<br>
    C:\Users\xxxxxx\Desktop\SHA512Algorithm<br>
-   Once in the correct location enter git clone and the copied address. Press enter. This will clone the repository to this folder. To run the program you will need to change directory into the folder theory-of-algos-project, enter cd theory-of-algos-project on the command line. 
+   Once in the correct location enter git clone and the copied address. Press enter. This will clone the repository to this folder.
+   change directory into the folder theory-of-algos-project, enter cd theory-of-algos-project on the command line. To run the program you can enter the following 
+   command make 512SHA, then enter ./512SHA input.txt this will generate the sha512 digest of the file. To test if the digest is correct there is a make test option.
+   Simply enter make test and the program will output an expected result using the built in sha512sum function, an actual result using the 512SHA program I have written
+   If the expected and actual results match the program will display pass, if they don't match the program will display fail. 
+   
+
    ### An explanation of what the SHA-512 algorithm is and why it is important.
    Secure Hash Algorithms are a family of cryptographic hash functions published by the National Institute of Standards and Technology(NSIT). 
    These include SHA-2 algorithms, which is a family of two similar hash functions, with different block sizes, kown as SHA-256 and SHA-512. 
@@ -21,7 +28,8 @@ Repo to calculate the SHA512 value of an input file
    This project is using the SHA-512 algorithm as a basis for a program written in C.
 
    A cryptographic hash function is a mathematical algorithm that maps data (called the "message") to a bit array of a fixed size, called the "hash value", 
-   "hash or "message digest". It is a one way function that is practically infeasible to invert. Currently, the only way to find a message that produces a given hash                is to attempt a brute-force search of possible inputs to see if they produce a match.
+   "hash or "message digest". It is a one way function that is practically infeasible to invert. Currently, the only way to find a message that produces a given hash                
+   is to attempt a brute-force search of possible inputs to see if they produce a match.
 
    Cryptographic hash functions should have the following main properties:
 
@@ -37,7 +45,12 @@ Repo to calculate the SHA512 value of an input file
    in the generation of random numbers (bits).[3]
    
    SHA-512 is more secure than SHA-256 and is commonly faster than SHA-256 on 64-bit machines such as AMD64.[4]
-
+   The SHA-512 algorithm is important because it is one of the strongest and most secure algorithms, currently the only known
+   way to try and break it is by brute force, that is trying every possible combination one by one.
+   A hash collision is a random match in hash values that occurs when a hashing algorithm produces the same hash value for two district pieces of data.   
+   The chance of a 512-bit hash collision occuring is 1.4 x 10 ^77[3 + 1 https://en.wikipedia.org/wiki/Birthday_problem#Probability_table]
+   It should be impossible to calculate or guess which values will collide. You can't check all possible values until you find a collision you would run out of time before you'd find a collision.
+   Time could mean anything from 1 minute to hundreds or thousands of years or more.
 
 
 
@@ -48,12 +61,46 @@ Repo to calculate the SHA512 value of an input file
    ![Endian Tables IBM](images/endianIBM.PNG)
     
    ### Why can't we reverse the SHA512 algorithm to retrieve the original message from a hash digest?
+   A SHA512 algorithm produces a 512 bit (64 bytes) hash value, which is a hexadecimal number made up of 128 digits.
+   Hash functions are used as one-way methods, they take the data(message)and calculate hash values(digests). 
+   It can't be reversed.[https://www.freeformatter.com/sha512-generator.html]
+   Using SHA-512 on text data with for examlple 250,000 characters, the output is just a 128 digit digest. 
+   If you wanted to work backwards from the 128 digit digest, you'd need to know how many characters were originally 
+   in the message, using just a 128 bit digest it would be impossible to work out what the starting number of characters is, 
+   and if you happened to find the correct amount of characters how would you know you have the correct order of characters
+   it seems like an impossible task, even if you had lots of powerful computers running code to try and reverse a 128 digit digest 
+   there would not be enough time to figure this out, also it would be very expensive to run computers working non stop trying to break just 
+   one 128 digit digest. 
+   Why can't the one way method be reversed? Hash functions discard information using the modulo operator. The modulo operator is 
+   not reversible, for example 32 mod 9 is 5, the result of this modulo operation is 5 but not knowing the starting point makes it impossible
+   to figure out what the original number was, what it's modulo was, you just know that the result is 5, it could be an infinite combination of numers
+   that give a result of 5. In SHA512 a lot of data is discarded during the hash process.The input message can be as big or small as you want, 
+   the output is always a 128 digit digest. Because of the discarded data, it would be impossible to work out the origial message from the
+   resulting 128 digit digest.
+   [https://privacycanada.net/hash-functions/why-are-hashes-irreversible/]
         
    ### Can you design an algorithm that, given enough time, will find input messages that give each of the possible 512-bit strings?
-        
+   My understanding of this question is it possible that someone could write an algorithm that could find is there any 512-bit string that is not an output of the algorithm.
+   Given that the algorithm computes 512 bit strings from any sized input it would be impossible to test the possibile 512 bit outputs of an infinite number of inputs. In theory
+   I would say it's a possibility to find a 512-bit string that is not an output of the algorithm, but how much time is enough time? Thousands of years or millions of computers working on the problem in parallell to 
+   cut down the amount of time - but then the associated cost of equiment and energy and how long would it take. 
+   The chances of a 512 bit hash collision occuring is 1.4 x 10^77, given that the estimated total number of fundamental particles in the observable universe is 1 x 10^80, I would say it's in practice impossible to find out if 
+   there any 512-bit string that is not an output of the algorithm. When do you know every possible input has been calculated, where do you store this information, how do you store this information is it even possible to store 
+   this amount of data? The only way to know if you have a 512 bit string that is not an output of the algorithm is if you know every possible input has been computed, how is decided that everything has been calculated, who or what 
+   decides every possible input has been calculated. I don't think this is a possibility as the amount of time required is beyond imagination. In the future this type of computation may be possible with something like Quantum computing or a new yet to be invented method of computing. For now I think it is not possible to design an algorithm. If the
+   time allowed was infinite and the input is infinite there's no way of drawing a line in the sand and saying everything has been computed..and who'd know we'd all be dead.
+   [https://www.physicsoftheuniverse.com/numbers.html]
+
    ### How difficult is it to find a hash digest beginning with at least twelve zeros?
+   It seems like it's somewhat difficult to find a hash beginning with at least 12 zeros, but not impossible, this seems to be an activity carried out in bit coin mining, finding a hash with a certain amount of leading 0's.
+   People run programmes on their computers to compute a hash with at least 12 leading zeros, though I think the number now is 17 leading zeros.
+   The reason for 12 leading zeros is that this is a low number. 
+
+
+
    This was a confusing question for me, I needed to investigate what benefit is it to have a hash digest beginning with a least twelve zeros, 
-   Bitcoin mining was mentioned in a lecture as a possible way to understand the value of a hash digest beginning with at least twelve zeros. Ken Shiriff's blog was mentioned as a good starting point to understand bitcoin and bitcoin mining.
+   Bitcoin mining was mentioned in a lecture as a possible way to understand the value of a hash digest beginning with at least twelve zeros. 
+   Ken Shiriff's blog was mentioned as a good starting point to understand bitcoin and bitcoin mining.
 
   ## References
   [1] Secure Hash Algorithms; https://en.wikipedia.org/wiki/Secure_Hash_Algorithms
