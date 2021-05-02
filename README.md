@@ -4,20 +4,20 @@ Repo to calculate the SHA512 value of an input file
 
    ### Description
    Repository contains a program written in the C programming language to calculate the SHA512 value of an input file. The program takes the name (or path of the file)
-   as a command line argument and outputs the SHA512 digest of the file. The program compiles using gcc, please see the next section called Compiliation Instructions for
+   as a command line argument and outputs the SHA512 digest of the file. The program compiles using gcc, please see the next section Compiliation Instructions for
    further explanation. 
    The following files are included in the repository, SHA512 file, Makefile, test files and this README.
 
 
    ### Compilation instructions
-   To run the program, clone the repository by clicking on the green button titled code. Click on the copy button to the rigth of the address or copy the address.
+   To run the program, clone the repository by clicking on the green button titled code. Click on the copy button to the right of the address or copy the address.
    Open a folder on your local machine. On the command line navigate to the folder, for example if the folder is called SHA512Algorithm and is located on the Desktop        
 of your local machine the path should look something like the below.<br>
    C:\Users\xxxxxx\Desktop\SHA512Algorithm<br>
    Once in the correct location enter git clone and the copied address. Press enter. This will clone the repository to this folder.
    change directory into the folder theory-of-algos-project, enter cd theory-of-algos-project on the command line. To run the program you can enter the following 
    command make 512SHA, then enter ./512SHA input.txt this will generate the sha512 digest of the file. To test if the digest is correct there is a make test option.
-   Simply enter make test and the program will output an expected result using the built in sha512sum function, an actual result using the 512SHA program I have written
+   Simply enter make test and the program will output an expected result using the built in sha512sum function, an actual result using the 512SHA program I have written. To test other inputs, replace the contents of input.txt and run the make test command again.
    If the expected and actual results match the program will display pass, if they don't match the program will display fail. 
    
 
@@ -39,7 +39,7 @@ of your local machine the path should look something like the below.<br>
    Infeasible to find two different messages with the same hash value.<br>
    A small change to a message should change the hash value so extensively that a new hash value appears uncorrelated with the old hash value.[2]
 
-   When a message of any length less than 2^64 bits (forSHA-1, SHA-224 and SHA-256) or less than 2^128 bits (for SHA-384, SHA-512, SHA-512/224and SHA-512/256) is
+   When a message of any length less than $2^64$ bits (forSHA-1, SHA-224 and SHA-256) or less than 2^128 bits (for SHA-384, SHA-512, SHA-512/224and SHA-512/256) is
    input to a hash algorithm, the result is an output called a message digest. The message digests range in length from 160 to 512 bits, depending on the algorithm.
    Secure hash algorithms are typically used with other cryptographic algorithms, such as digital signature algorithms and keyed-hash message authentication codes, or 
    in the generation of random numbers (bits).[3]
@@ -48,7 +48,7 @@ of your local machine the path should look something like the below.<br>
    The SHA-512 algorithm is important because it is one of the strongest and most secure algorithms, currently the only known
    way to try and break it is by brute force, that is trying every possible combination one by one.
    A hash collision is a random match in hash values that occurs when a hashing algorithm produces the same hash value for two district pieces of data.   
-   The chance of a 512-bit hash collision occuring is 1.4 x 10 ^77[3 + 1 https://en.wikipedia.org/wiki/Birthday_problem#Probability_table]
+   The chance of a 512-bit hash collision occuring is 1.4 x 10 ^77.[5]
    It should be impossible to calculate or guess which values will collide. You can't check all possible values until you find a collision you would run out of time before you'd find a collision.
    Time could mean anything from 1 minute to hundreds or thousands of years or more.
 
@@ -58,7 +58,7 @@ of your local machine the path should look something like the below.<br>
    ### Why can't we reverse the SHA512 algorithm to retrieve the original message from a hash digest?
    A SHA512 algorithm produces a 512 bit (64 bytes) hash value, which is a hexadecimal number made up of 128 digits.
    Hash functions are used as one-way methods, they take the data(message)and calculate hash values(digests). 
-   It can't be reversed.[https://www.freeformatter.com/sha512-generator.html]
+   It can't be reversed.[6]
    Using SHA-512 on text data with for examlple 250,000 characters, the output is just a 128 digit digest. 
    If you wanted to work backwards from the 128 digit digest, you'd need to know how many characters were originally 
    in the message, using just a 128 bit digest it would be impossible to work out what the starting number of characters is, 
@@ -71,33 +71,33 @@ of your local machine the path should look something like the below.<br>
    to figure out what the original number was, what it's modulo was, you just know that the result is 5, it could be an infinite combination of numbers
    that give a result of 5. In SHA512 a lot of data is discarded during the hash process.The input message can be as big or small as you want, 
    the output is always a 128 digit digest. Because of the discarded data, it would be impossible to work out the origial message from the
-   resulting 128 digit digest.
-   [https://privacycanada.net/hash-functions/why-are-hashes-irreversible/]
+   resulting 128 digit digest.[7]
+   
         
    ### Can you design an algorithm that, given enough time, will find input messages that give each of the possible 512-bit strings?
    My understanding of this question is it possible that someone could write an algorithm that could find is there any 512-bit string that is not an output of the algorithm.
    Given that the algorithm computes 512 bit strings from any sized input it would be impossible to test the possibile 512 bit outputs of an infinite number of inputs. In theory
    I would say it's a possibility to find a 512-bit string that is not an output of the algorithm, but how much time is enough time? Thousands of years or millions of computers working on the problem in parallell to 
    cut down the amount of time - but then the associated cost of equiment and energy and how long would it take. 
-   The chances of a 512 bit hash collision occuring is 1.4 x 10^77, given that the estimated total number of fundamental particles in the observable universe is 1 x 10^80, I would say it's in practice impossible to find out if 
-   there any 512-bit string that is not an output of the algorithm. When do you know every possible input has been calculated, where do you store this information, how do you store this information is it even possible to store 
+   The chances of a 512 bit hash collision occuring is 1.4 x 10^77, given that the estimated total number of fundamental particles in the observable universe is approximately 1 x 10^86,[8] I would say it's in practice impossible to find out if 
+   there is any 512-bit string that is not an output of the algorithm. When do you know every possible input has been calculated, where do you store this information, how do you store this information is it even possible to store 
    this amount of data? The only way to know if you have a 512 bit string that is not an output of the algorithm is if you know every possible input has been computed, how is decided that everything has been calculated, who or what 
    decides every possible input has been calculated. I don't think this is a possibility as the amount of time required is beyond imagination. In the future this type of computation may be possible with something like Quantum computing
-   using something like Grovers algorithm[https://en.wikipedia.org/wiki/Grover%27s_algorithm]  or a new yet to be invented method of computing. Grovers algorithm is a quantum algorithm for searching an unsorted database with
+   using something like Grovers algorithm[9] or a new yet to be invented method of computing. Grovers algorithm is a quantum algorithm for searching an unsorted database with
    N entries in O(N1/2) time and using O(logN) storage space. It was invented by Lov Grover in 1996. Grover's algorithm, which takes O(N1/2) time, is the fastest possible quantum algorithm for searching an unsorted database. 
    It provides "only" a quadratic speedup, so if it took a computer one million searches to find something in a database, using Grovers algorithm it would take one thousand searches. Unlike other quantum algorithms, which can provide exponential speedup over their classical counterparts. However, even quadratic speedup is considerable when N, the number of entries is large.
-   Grover's algorithm is probabilistic, in the sense that it gives the correct answer with high probability. The probability of failure can be decreased by repeating the algorithm.[https://www.quantiki.org/wiki/grovers-search-algorithm]
+   Grover's algorithm is probabilistic, in the sense that it gives the correct answer with high probability. The probability of failure can be decreased by repeating the algorithm.[10]
    Grover's algorithm could brute-force a 128-bit symmetric cryptographic key in roughly 2 ^ 64 iterations, or a 256-bit key in roughly 2 ^ 128 iterations. 
-   As a result, it is sometimes suggested that symmetric key lengths be doubled to protect against future quantum attacks.[https://en.wikipedia.org/wiki/Grover%27s_algorithm]
+   As a result, it is sometimes suggested that symmetric key lengths be doubled to protect against future quantum attacks.[11]
    For now I think it is not possible to design an algorithm. If the
-   time allowed was infinite and the input is infinite there's no way of drawing a line in the sand and saying everything has been computed..and who'd know we'd all be dead.
-   [https://www.physicsoftheuniverse.com/numbers.html]
+   time allowed was infinite and the input is infinite there's no way of drawing a line in the sand and saying everything has been computed.
+   
 
    ### How difficult is it to find a hash digest beginning with at least twelve zeros?
    It seems like it's  difficult to find a hash beginning with at least 12 zeros, but not impossible, from researching online finding a hash digest with at least twelve zeros is an  activity carried out in bit coin mining, finding a hash with a certain amount of leading 0's.
    People run programmes on their computers or in a pool of computers to compute a hash with at least 12 leading zeros, though I think the number now is 17 leading zeros.
-   The reason for 12 leading zeros is that this is a low number and difficult to find. According to Ken Shirrif's blog from 2014[https://www.righto.com/2014/02/bitcoin-mining-hard-way-algorithms.html], finding a hash with 15 leading 0's is of the order  less than 1 in  10 ^ 19 chance, unfortunately my probability logic is not good, 
-   but given the chance of 15 leading 0's is 1 in 10 ^ 19, the chance of finding 12 leading 0's will be a bit better but still a very large number. Or as Ken Sherriff said, it would be like trying to find on particular grain of sand from all the sand  currently on earth. 
+   The reason for 12 leading zeros is that this is a low number and difficult to find. According to Ken Shirrif's blog from 2014,[12] finding a hash with 15 leading 0's is of the order  less than 1 in  10 ^ 19 chance, unfortunately my probability logic is not good, 
+   but given the chance of 15 leading 0's is 1 in 10 ^ 19, the chance of finding 12 leading 0's will be a bit better but still a very large number. Or as Ken Sherriff said, it would be like trying to find one particular grain of sand from all the sand  currently on earth. 
 
 
 
@@ -108,8 +108,14 @@ of your local machine the path should look something like the below.<br>
   [2] Cryptographic hash function explantions; https://en.wikipedia.org/wiki/Cryptographic_hash_function
   [3] Secure Hash Standard (SHS); Information Technology Laboratory National Institute of Standards and Technology Gaithersburg, MD 20899-8900
   [4] Security of SHA-512; https://en.wikipedia.org/wiki/Cryptographic_hash_function
-  
-
+  [5] Probability of collisions; https://en.wikipedia.org/wiki/Birthday_problem#Probability_table
+  [6] Reversal of SHA Algorithms; https://www.freeformatter.com/sha512-generator.html
+  [7] Modulo and SHA; https://privacycanada.net/hash-functions/why-are-hashes-irreversible/]
+  [8] No of Particles; https://en.wikipedia.org/wiki/Elementary_particle
+  [9] Grovers Algorithm; https://en.wikipedia.org/wiki/Grover%27s_algorithm
+  [10] Grovers Algorithm probability; https://www.quantiki.org/wiki/grovers-search-algorithm
+  [11] Grovers Algorithm search time; https://en.wikipedia.org/wiki/Grover%27s_algorithm
+  [12] Leading zero's; https://www.righto.com/2014/02/bitcoin-mining-hard-way-algorithms.html
   ### Research on Endianness
   https://en.wikipedia.org/wiki/Endianness
   https://developer.ibm.com/technologies/systems/articles/au-endianc/
