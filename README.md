@@ -39,7 +39,7 @@ of your local machine the path should look something like the below.<br>
    Infeasible to find two different messages with the same hash value.<br>
    A small change to a message should change the hash value so extensively that a new hash value appears uncorrelated with the old hash value.[2]
 
-   When a message of any length less than $2^64$ bits (forSHA-1, SHA-224 and SHA-256) or less than 2^128 bits (for SHA-384, SHA-512, SHA-512/224and SHA-512/256) is
+   When a message of any length less than 2<sup>64</sup> bits (forSHA-1, SHA-224 and SHA-256) or less than 2^128 bits (for SHA-384, SHA-512, SHA-512/224and SHA-512/256) is
    input to a hash algorithm, the result is an output called a message digest. The message digests range in length from 160 to 512 bits, depending on the algorithm.
    Secure hash algorithms are typically used with other cryptographic algorithms, such as digital signature algorithms and keyed-hash message authentication codes, or 
    in the generation of random numbers (bits).[3]
