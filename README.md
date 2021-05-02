@@ -54,11 +54,6 @@ of your local machine the path should look something like the below.<br>
 
 
 
-   ### Understanding issues that required attention
-   
-   ![Endian Diagram Wikipedia](images/endianExampleWiki.PNG)
-   <br>
-   ![Endian Tables IBM](images/endianIBM.PNG)
     
    ### Why can't we reverse the SHA512 algorithm to retrieve the original message from a hash digest?
    A SHA512 algorithm produces a 512 bit (64 bytes) hash value, which is a hexadecimal number made up of 128 digits.
@@ -73,7 +68,7 @@ of your local machine the path should look something like the below.<br>
    one 128 digit digest. 
    Why can't the one way method be reversed? Hash functions discard information using the modulo operator. The modulo operator is 
    not reversible, for example 32 mod 9 is 5, the result of this modulo operation is 5 but not knowing the starting point makes it impossible
-   to figure out what the original number was, what it's modulo was, you just know that the result is 5, it could be an infinite combination of numers
+   to figure out what the original number was, what it's modulo was, you just know that the result is 5, it could be an infinite combination of numbers
    that give a result of 5. In SHA512 a lot of data is discarded during the hash process.The input message can be as big or small as you want, 
    the output is always a 128 digit digest. Because of the discarded data, it would be impossible to work out the origial message from the
    resulting 128 digit digest.
@@ -87,20 +82,26 @@ of your local machine the path should look something like the below.<br>
    The chances of a 512 bit hash collision occuring is 1.4 x 10^77, given that the estimated total number of fundamental particles in the observable universe is 1 x 10^80, I would say it's in practice impossible to find out if 
    there any 512-bit string that is not an output of the algorithm. When do you know every possible input has been calculated, where do you store this information, how do you store this information is it even possible to store 
    this amount of data? The only way to know if you have a 512 bit string that is not an output of the algorithm is if you know every possible input has been computed, how is decided that everything has been calculated, who or what 
-   decides every possible input has been calculated. I don't think this is a possibility as the amount of time required is beyond imagination. In the future this type of computation may be possible with something like Quantum computing or a new yet to be invented method of computing. For now I think it is not possible to design an algorithm. If the
+   decides every possible input has been calculated. I don't think this is a possibility as the amount of time required is beyond imagination. In the future this type of computation may be possible with something like Quantum computing
+   using something like Grovers algorithm[https://en.wikipedia.org/wiki/Grover%27s_algorithm]  or a new yet to be invented method of computing. Grovers algorithm is a quantum algorithm for searching an unsorted database with
+   N entries in O(N1/2) time and using O(logN) storage space. It was invented by Lov Grover in 1996. Grover's algorithm, which takes O(N1/2) time, is the fastest possible quantum algorithm for searching an unsorted database. 
+   It provides "only" a quadratic speedup, so if it took a computer one million searches to find something in a database, using Grovers algorithm it would take one thousand searches. Unlike other quantum algorithms, which can provide exponential speedup over their classical counterparts. However, even quadratic speedup is considerable when N, the number of entries is large.
+   Grover's algorithm is probabilistic, in the sense that it gives the correct answer with high probability. The probability of failure can be decreased by repeating the algorithm.[https://www.quantiki.org/wiki/grovers-search-algorithm]
+   Grover's algorithm could brute-force a 128-bit symmetric cryptographic key in roughly 2 ^ 64 iterations, or a 256-bit key in roughly 2 ^ 128 iterations. 
+   As a result, it is sometimes suggested that symmetric key lengths be doubled to protect against future quantum attacks.[https://en.wikipedia.org/wiki/Grover%27s_algorithm]
+   For now I think it is not possible to design an algorithm. If the
    time allowed was infinite and the input is infinite there's no way of drawing a line in the sand and saying everything has been computed..and who'd know we'd all be dead.
    [https://www.physicsoftheuniverse.com/numbers.html]
 
    ### How difficult is it to find a hash digest beginning with at least twelve zeros?
-   It seems like it's somewhat difficult to find a hash beginning with at least 12 zeros, but not impossible, this seems to be an activity carried out in bit coin mining, finding a hash with a certain amount of leading 0's.
-   People run programmes on their computers to compute a hash with at least 12 leading zeros, though I think the number now is 17 leading zeros.
-   The reason for 12 leading zeros is that this is a low number. 
+   It seems like it's  difficult to find a hash beginning with at least 12 zeros, but not impossible, from researching online finding a hash digest with at least twelve zeros is an  activity carried out in bit coin mining, finding a hash with a certain amount of leading 0's.
+   People run programmes on their computers or in a pool of computers to compute a hash with at least 12 leading zeros, though I think the number now is 17 leading zeros.
+   The reason for 12 leading zeros is that this is a low number and difficult to find. According to Ken Shirrif's blog from 2014[https://www.righto.com/2014/02/bitcoin-mining-hard-way-algorithms.html], finding a hash with 15 leading 0's is of the order  less than 1 in  10 ^ 19 chance, unfortunately my probability logic is not good, 
+   but given the chance of 15 leading 0's is 1 in 10 ^ 19, the chance of finding 12 leading 0's will be a bit better but still a very large number. Or as Ken Sherriff said, it would be like trying to find on particular grain of sand from all the sand  currently on earth. 
 
 
 
-   This was a confusing question for me, I needed to investigate what benefit is it to have a hash digest beginning with a least twelve zeros, 
-   Bitcoin mining was mentioned in a lecture as a possible way to understand the value of a hash digest beginning with at least twelve zeros. 
-   Ken Shiriff's blog was mentioned as a good starting point to understand bitcoin and bitcoin mining.
+
 
   ## References
   [1] Secure Hash Algorithms; https://en.wikipedia.org/wiki/Secure_Hash_Algorithms
@@ -109,7 +110,7 @@ of your local machine the path should look something like the below.<br>
   [4] Security of SHA-512; https://en.wikipedia.org/wiki/Cryptographic_hash_function
   
 
-  ### Research on Topics not fully understood by me
+  ### Research on Endianness
   https://en.wikipedia.org/wiki/Endianness
   https://developer.ibm.com/technologies/systems/articles/au-endianc/
 
@@ -119,25 +120,6 @@ of your local machine the path should look something like the below.<br>
   ### Links for other SHA-512 information
   [i] SHA-512 vs SHA-256 Structure; https://en.wikipedia.org/wiki/SHA-2
 
-  SHA-512 is identical in structure to SHA-256, but:
 
-    the message is broken into 1024-bit chunks,
-    the initial hash values and round constants are extended to 64 bits,
-    there are 80 rounds instead of 64,
-    the message schedule array w has 80 64-bit words instead of 64 32-bit words,
-    to extend the message schedule array w, the loop is from 16 to 79 instead of from 16 to 63,
-    the round constants are based on the first 80 primes 2..409,
-    the word size used for calculations is 64 bits long,
-    the appended length of the message (before pre-processing), in bits, is a 128-bit big-endian integer, and
-    the shift and rotate amounts used are different[i]
 
-# To Do List
-   
-  Research http://www.righto.com/2014/09/mining-bitcoin-with-pencil-and-paper.html <br>
-  Research bitcoin - understand what it does and why it's so secure <br>
-  Bitcoin http://www.righto.com/2014/02/bitcoins-hard-way-using-raw-bitcoin.html
-  Bitcoin Mining http://www.righto.com/2014/02/bitcoin-mining-hard-way-algorithms.html
-  https://bitcoin.org/en/how-it-works
-  https://michaelnielsen.org/ddi/how-the-bitcoin-protocol-actually-works/
-  
-  look at open ssl project <br>
+

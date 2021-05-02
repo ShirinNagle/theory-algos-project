@@ -1,7 +1,7 @@
 # Example of a comment in Makefile
 
 # How to declare a variable in Makefile and assign executable files
-EXECS = 512SHA optsarg sha256 sha512
+EXECS = 512SHA optsargs sha256 sha512
 
 #identifier for the Makefile
 512SHA: 512SHA.c
