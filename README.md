@@ -104,27 +104,27 @@ of your local machine the path should look something like the below.<br>
 
 
   ## References
-  [1] Secure Hash Algorithms; https://en.wikipedia.org/wiki/Secure_Hash_Algorithms
-  [2] Cryptographic hash function explantions; https://en.wikipedia.org/wiki/Cryptographic_hash_function
-  [3] Secure Hash Standard (SHS); Information Technology Laboratory National Institute of Standards and Technology Gaithersburg, MD 20899-8900
-  [4] Security of SHA-512; https://en.wikipedia.org/wiki/Cryptographic_hash_function
-  [5] Probability of collisions; https://en.wikipedia.org/wiki/Birthday_problem#Probability_table
-  [6] Reversal of SHA Algorithms; https://www.freeformatter.com/sha512-generator.html
-  [7] Modulo and SHA; https://privacycanada.net/hash-functions/why-are-hashes-irreversible/]
-  [8] No of Particles; https://en.wikipedia.org/wiki/Elementary_particle
-  [9] Grovers Algorithm; https://en.wikipedia.org/wiki/Grover%27s_algorithm
-  [10] Grovers Algorithm probability; https://www.quantiki.org/wiki/grovers-search-algorithm
-  [11] Grovers Algorithm search time; https://en.wikipedia.org/wiki/Grover%27s_algorithm
-  [12] Leading zero's; https://www.righto.com/2014/02/bitcoin-mining-hard-way-algorithms.html
+  [1] Secure Hash Algorithms; https://en.wikipedia.org/wiki/Secure_Hash_Algorithms<br>
+  [2] Cryptographic hash function explantions; https://en.wikipedia.org/wiki/Cryptographic_hash_function<br>
+  [3] Secure Hash Standard (SHS); Information Technology Laboratory National Institute of Standards and Technology Gaithersburg, MD 20899-8900<br>
+  [4] Security of SHA-512; https://en.wikipedia.org/wiki/Cryptographic_hash_function<br>
+  [5] Probability of collisions; https://en.wikipedia.org/wiki/Birthday_problem#Probability_table<br>
+  [6] Reversal of SHA Algorithms; https://www.freeformatter.com/sha512-generator.html<br>
+  [7] Modulo and SHA; https://privacycanada.net/hash-functions/why-are-hashes-irreversible/<br>
+  [8] No of Particles; https://en.wikipedia.org/wiki/Elementary_particle<br>
+  [9] Grovers Algorithm; https://en.wikipedia.org/wiki/Grover%27s_algorithm<br>
+  [10] Grovers Algorithm probability; https://www.quantiki.org/wiki/grovers-search-algorithm<br>
+  [11] Grovers Algorithm search time; https://en.wikipedia.org/wiki/Grover%27s_algorithm<br>
+  [12] Leading zero's; https://www.righto.com/2014/02/bitcoin-mining-hard-way-algorithms.html<br>
   ### Research on Endianness
-  https://en.wikipedia.org/wiki/Endianness
-  https://developer.ibm.com/technologies/systems/articles/au-endianc/
+  https://en.wikipedia.org/wiki/Endianness<br>
+  https://developer.ibm.com/technologies/systems/articles/au-endianc/<br>
 
   ### Links for tutorials used in the course of this peoject
-  [a] How to write a MakeFile; https://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/
+  [a] How to write a MakeFile; https://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/<br>
 
   ### Links for other SHA-512 information
-  [i] SHA-512 vs SHA-256 Structure; https://en.wikipedia.org/wiki/SHA-2
+  [i] SHA-512 vs SHA-256 Structure; https://en.wikipedia.org/wiki/SHA-2<br>
 
 
 
